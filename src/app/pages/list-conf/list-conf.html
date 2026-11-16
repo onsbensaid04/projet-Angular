@@ -1,0 +1,29 @@
+<section class="conf-section">
+  <h2 class="conf-heading">Liste des conférences</h2>
+
+  <div class="conf-grid">
+    @for (conf of conferences; track conf.id) {
+      <article class="conf-card">
+        <div class="conf-image-wrapper">
+          <img class="conf-image" [src]="conf.picture" [alt]="conf.title" />
+          <span
+            class="conf-badge"
+            [class.full]="conf.available_place === 0"
+            [class.low]="conf.available_place > 0 && conf.available_place <= 10"
+          >
+            {{ conf.available_place === 0 ? 'Complet' : conf.available_place + ' places' }}
+          </span>
+        </div>
+
+        <div class="conf-body">
+          <h3 class="conf-title">{{ conf.title }}</h3>
+          <p class="conf-info">📅 {{ conf.date | date: 'dd/MM/yyyy à HH:mm' }}</p>
+          <p class="conf-info">📍 {{ conf.adresse }}</p>
+          <p class="conf-info">🎟️ Places disponibles : <strong>{{ conf.available_place }}</strong></p>
+        </div>
+      </article>
+    } @empty {
+      <p class="conf-empty">Aucune conférence pour le moment.</p>
+    }
+  </div>
+</section>
