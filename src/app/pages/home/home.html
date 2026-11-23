@@ -1,4 +1,50 @@
-<h1>{{title}}</h1>
-<button class="btn btn-sm btn-primary"  (click)="change()"[hidden]="!state">
-change
-</button>
+<div class="container py-4">
+
+  <app-user-profile></app-user-profile>
+
+  <app-friends-list></app-friends-list>
+
+  <app-notifications></app-notifications>
+
+  <div class="mb-4">
+
+    <input type="text" name="search"
+           class="form-control shadow-sm"
+           placeholder="🔍 Search By Title"
+           [(ngModel)]="searchTitle">
+  </div>
+
+  <h4 class="text-primary mb-3">{{searchTitle}}</h4>
+
+  @if (list.length == 0) {
+
+    <div class="alert alert-info text-center">
+      Aucune conférence disponible pour le moment.
+    </div>
+
+  }
+  @else {
+
+    <div class="row">
+
+      @for (conf of list; track conf.title) {
+
+        @if (searchTitle == null || searchTitle == '' || conf.title.toLowerCase().includes(searchTitle.toLowerCase())) {
+          <div class="col-md-4 mb-4">
+
+            <app-conference-card
+              [conf]="conf"
+              (participateEvent)="participate($event)">
+            </app-conference-card>
+
+          </div>
+
+        }
+
+      }
+
+    </div>
+
+  }
+
+</div>

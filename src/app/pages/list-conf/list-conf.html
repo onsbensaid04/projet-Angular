@@ -1,29 +1,52 @@
-<section class="conf-section">
-  <h2 class="conf-heading">Liste des conférences</h2>
 
-  <div class="conf-grid">
-    @for (conf of conferences; track conf.id) {
-      <article class="conf-card">
-        <div class="conf-image-wrapper">
-          <img class="conf-image" [src]="conf.picture" [alt]="conf.title" />
-          <span
-            class="conf-badge"
-            [class.full]="conf.available_place === 0"
-            [class.low]="conf.available_place > 0 && conf.available_place <= 10"
-          >
-            {{ conf.available_place === 0 ? 'Complet' : conf.available_place + ' places' }}
-          </span>
-        </div>
+<div class="container mt-4">
 
-        <div class="conf-body">
-          <h3 class="conf-title">{{ conf.title }}</h3>
-          <p class="conf-info">📅 {{ conf.date | date: 'dd/MM/yyyy à HH:mm' }}</p>
-          <p class="conf-info">📍 {{ conf.adresse }}</p>
-          <p class="conf-info">🎟️ Places disponibles : <strong>{{ conf.available_place }}</strong></p>
-        </div>
-      </article>
-    } @empty {
-      <p class="conf-empty">Aucune conférence pour le moment.</p>
-    }
+  <div class="mb-4">
+    <label class="form-label fw-bold text-primary">
+      Search Conference
+    </label>
+
+    <input
+      type="text"
+      name="search"
+      class="form-control shadow-sm"
+      placeholder="🔍 Search By Title"
+      [(ngModel)]="searchTitle">
   </div>
-</section>
+
+  <h4 class="text-primary mb-3">{{ searchTitle }}</h4>
+
+  @if (list.length == 0) {
+
+    <div class="alert alert-info text-center">
+      Aucune conférence disponible pour le moment.
+    </div>
+
+  }
+  @else {
+
+    <div class="row">
+
+      @for (conf of list; track conf.title) {
+
+        @if (searchTitle.trim() == '' ||
+        conf.title.toLowerCase().includes(searchTitle.toLowerCase())) {
+
+          <div class="col-md-4 mb-4">
+
+            <app-conference-card
+              [conf]="conf"
+              (participateEvent)="participate($event)">
+            </app-conference-card>
+
+          </div>
+
+        }
+
+      }
+
+    </div>
+
+  }
+
+</div>

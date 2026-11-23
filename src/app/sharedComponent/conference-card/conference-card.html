@@ -1,0 +1,41 @@
+<div class="card shadow-sm h-100">
+
+  <img [src]="conf.picture"
+       class="card-img-top"
+       alt="Conference image">
+
+  <div class="card-body">
+
+    <h5 class="card-title fw-bold">
+      {{conf.title | uppercase}}
+    </h5>
+
+    <p class="text-muted">
+      {{conf.description}}
+    </p>
+
+    <p>
+      <strong>Date :</strong>
+      {{conf.date | date:'dd/MM/yyyy'}}
+    </p>
+
+    <p>
+      <strong>Available places :</strong>
+      {{conf.nbrMax - conf.nbrReservation}}
+    </p>
+
+    <button class="btn w-100"
+            [ngClass]="{
+          'btn-success': conf.nbrMax - conf.nbrReservation >= 10,
+          'btn-warning': conf.nbrMax - conf.nbrReservation < 10 && conf.nbrMax - conf.nbrReservation > 0,
+          'btn-danger': conf.nbrMax == conf.nbrReservation
+        }"
+            [disabled]="conf.nbrMax == conf.nbrReservation"
+            (click)="participate()">
+
+      Participate
+
+    </button>
+
+  </div>
+</div>

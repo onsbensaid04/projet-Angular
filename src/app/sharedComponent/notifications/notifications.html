@@ -1,0 +1,28 @@
+
+<div class="card shadow-sm p-3 mb-4">
+
+  <h4 class="text-warning">Zone de notifications</h4>
+
+  <p>Vous avez 3 nouvelles notifications.</p>
+
+  <button
+    class="btn btn-warning"
+    (click)="showNotifications()">
+
+    {{ showNotif ? 'Masquer les notifications' : 'Afficher les notifications' }}
+
+  </button>
+
+  @if (showNotif) {
+
+    <ul class="mt-3">
+
+      @for (notification of notifications; track notification) {
+        <li>{{ notification }}</li>
+      }
+
+    </ul>
+
+  }
+
+</div>

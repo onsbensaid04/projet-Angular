@@ -1,0 +1,33 @@
+.custom-navbar {
+  background: linear-gradient(90deg, #123b70, #0d6efd);
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  font-size: 23px;
+  color: white;
+}
+
+.brand-icon {
+  background-color: white;
+  color: #0d6efd;
+  padding: 6px 11px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+.nav-link {
+  color: white !important;
+  margin-left: 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #cce0ff !important;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  border-bottom: 2px solid white;
+}

@@ -1,0 +1,18 @@
+<div class="card shadow-sm p-3 mb-4">
+
+  <h4 class="text-success">Liste des amis</h4>
+
+  <!-- 3 champs liés à la même variable (two-way binding) -->
+  <div class="d-flex mb-3">
+    @for (f of friends; track f) {
+      <input type="text" class="form-control" [(ngModel)]="name">
+    }
+  </div>
+
+  <ul>
+    @for (friend of friends; track friend) {
+      <li>{{ friend }}</li>
+    }
+  </ul>
+
+</div>
